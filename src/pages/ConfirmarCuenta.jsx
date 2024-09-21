@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom'
 import Alerta from '../components/Alerta';
+import clienteAxios from '../config/axios';
 const ConfirmarCuenta = () => {
 
     const [cuentaConfirmada, setCuentaConfirmada] = useState(false);
@@ -16,8 +17,8 @@ const ConfirmarCuenta = () => {
         const source = axios.CancelToken.source();
         const confirmarCuenta = async () => {
             try {
-                const url = `http://localhost:4000/api/veterinarios/confirmar/${id}`;
-                const { data } = await axios.get(url, { cancelToken: source.token });
+                const url = `/veterinarios/confirmar/${id}`;
+                const { data } = await clienteAxios(url, { cancelToken: source.token });
                 setCuentaConfirmada(true);
                 setAlerta({ msg: data.msg });
             } catch (error) {
