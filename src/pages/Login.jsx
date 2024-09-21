@@ -28,7 +28,7 @@ const Login = () => {
                             Passsword
                         </label>
                         <input 
-                            type="text" 
+                            type="password" 
                             placeholder="Tu Password"
                             className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
                         />
