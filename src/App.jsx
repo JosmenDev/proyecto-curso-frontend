@@ -8,6 +8,8 @@ import ConfirmarCuenta from "./pages/ConfirmarCuenta";
 import NuevoPassword from "./pages/NuevoPassword";
 // Provider: Es el que contiene los datos
 import { AuthProvider } from "./context/AuthProvider";
+import RutaProtegida from "./layout/RutaProtegida";
+import AdministrarPacientes from "./pages/AdministrarPacientes";
 
 function App() {
 
@@ -15,6 +17,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          {/* Rutas Publicas */}
           <Route path="/" element={<AuthLayout/>}>
             <Route index element={<Login/>}/>
             <Route path="registrar" element={<Registrar/>}/>
@@ -22,6 +25,12 @@ function App() {
             <Route path="olvide-password/:token" element={<NuevoPassword/>}/>
             <Route path="confirmar/:id" element={<ConfirmarCuenta/>}/>
           </Route>
+
+          {/* Rutas Privadas */}
+          <Route path="/admin" element={<RutaProtegida/>}>
+            <Route index element={<AdministrarPacientes/>}/>
+          </Route>  
+
         </Routes>
       </AuthProvider>
     </BrowserRouter>

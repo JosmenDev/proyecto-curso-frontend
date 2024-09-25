@@ -8,12 +8,17 @@ const AuthContext = createContext();
 const AuthProvider = ({children}) => {
     // Es lo mismo a colocar props y despues => const {children} = props
     const [ auth, setAuth ] = useState({});
+    const [ cargando, setCargando ] = useState(true);
 
     // Revisar si el usuario está autenticado
     useEffect( () => {
         const autenticarUsuario = async () => {
             const token = localStorage.getItem('token');
-            if(!token) return;
+            // console.log('Verificando token');
+            if(!token) {
+                setCargando(false);
+                return;
+            };
 
             // console.log('Si hay token');;
             const config = {
@@ -30,6 +35,8 @@ const AuthProvider = ({children}) => {
                 console.log(error.response.data.msg);
                 setAuth({});
             }
+
+            setCargando(false);
         };
         autenticarUsuario();
     }, [] );
@@ -38,7 +45,8 @@ const AuthProvider = ({children}) => {
         <AuthContext.Provider
             value = {{
                 auth, 
-                setAuth
+                setAuth,
+                cargando
             }}
         >
             {/* children quiere decir todos los componentes que estan dentro del AuthProvider en el app.jsx */}
