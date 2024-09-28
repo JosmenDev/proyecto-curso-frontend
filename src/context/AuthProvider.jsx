@@ -40,13 +40,20 @@ const AuthProvider = ({children}) => {
         };
         autenticarUsuario();
     }, [] );
+
+    const cerrarSesion = () => {
+        localStorage.removeItem('token');
+        setAuth({});
+    }
+
     return (
         // AuthProvider retorna el context y va a tener el Provider
         <AuthContext.Provider
             value = {{
                 auth, 
                 setAuth,
-                cargando
+                cargando,
+                cerrarSesion
             }}
         >
             {/* children quiere decir todos los componentes que estan dentro del AuthProvider en el app.jsx */}
