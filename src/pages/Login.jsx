@@ -30,6 +30,7 @@ const Login = () => {
             const { data } = await clienteAxios.post(url, {email, password});
             // console.log(data);
             localStorage.setItem('token', data.token);
+            setAuth(data);
             navigate('/admin');
         } catch (error) {
             setAlerta({
